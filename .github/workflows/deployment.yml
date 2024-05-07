@@ -32,8 +32,8 @@ jobs:
       - run: echo "🎉 target evn ${{ inputs.target-env}}"
       - run: echo "🎉 target evn inputs.target-env"
       - run: echo "💡 get azure webapp name from secrets ${{ secrets.AZURE_WEBAPP_SERVICE_NAME }}"
-      - run: echo "🍏 is Dev  ${{ inputs.target-env }} == 'Development'"
-      - run: echo "🐧 is Prod  ${{ inputs.target-env }} == 'Production'"
+      - run: echo "🍏 is Dev  ${{ inputs.target-env }} == 'staging'"
+      - run: echo "🐧 is Prod  ${{ inputs.target-env }} == 'production'"
 
       - name: Download artifact from build job
         uses: actions/download-artifact@v3
@@ -44,17 +44,17 @@ jobs:
         run: unzip release.zip
 
       - name: "Deploy to Azure Dev WebApp"
-        if:  inputs.target-env == 'Development'
+        if:  inputs.target-env == 'staging'
         id: deploy-to-webapp-dev
         uses: azure/webapps-deploy@v2
         with:
           app-name: ${{ secrets.AZURE_WEBAPP_SERVICE_NAME }}
-          slot-name: "production"
+          slot-name: "staging"
           publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
           package: '.'
 
       - name: "Deploy to Azure Prod WebApp"
-        if:  inputs.target-env == 'Production'
+        if:  inputs.target-env == 'production'
         id: deploy-to-webapp-prod
         uses: azure/webapps-deploy@v2
         with:
