@@ -70,7 +70,8 @@ jobs:
         target: [staging, production ]
     uses: ./.github/workflows/deployment.yml
     with:
-      target-env: ${{ matrix.target }}
+      # target-env: ${{ matrix.target }}
+      target-env: ${{ inputs.target-env }}
     secrets: inherit
 
 
