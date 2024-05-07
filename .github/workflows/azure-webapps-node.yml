@@ -67,7 +67,7 @@ jobs:
     strategy:
       fail-fast: true
       matrix:
-        target: [Development, Production ]
+        target: [staging, production ]
     uses: ./.github/workflows/deployment.yml
     with:
       target-env: ${{ matrix.target }}
