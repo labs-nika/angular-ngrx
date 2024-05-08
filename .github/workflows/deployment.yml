@@ -42,7 +42,7 @@ jobs:
       - name: "Deploy to Azure Dev WebApp"
         if:  inputs.target-env == 'staging'
         id: deploy-to-webapp-dev
-        uses: azure/webapps-deploy@v2
+        uses: azure/webapps-deploy@v3
         with:
           app-name: ${{ secrets.AZURE_WEBAPP_SERVICE_NAME }}
           slot-name: "staging"
@@ -52,7 +52,7 @@ jobs:
       - name: "Deploy to Azure Prod WebApp"
         if:  inputs.target-env == 'production'
         id: deploy-to-webapp-prod
-        uses: azure/webapps-deploy@v2
+        uses: azure/webapps-deploy@v3
         with:
           app-name: ${{ secrets.AZURE_WEBAPP_SERVICE_NAME }}
           slot-name: "production"
